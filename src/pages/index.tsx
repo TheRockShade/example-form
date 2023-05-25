@@ -1,11 +1,5 @@
-import { Typography } from "@mui/material";
+import Form from "@/components/Form";
 
-const index: React.FC = () => {
-  return (
-    <Typography variant="h4" component="h4" sx={{ textAlign: "center" }}>
-      Здесь будет главная страница
-    </Typography>
-  );
-};
+const index: React.FC = () => <Form />;
 
 export default index;
