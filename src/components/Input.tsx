@@ -3,7 +3,8 @@ import { Controller } from "react-hook-form";
 
 interface InputProps {
   control: any;
-  inputData: {
+  data: {
+		id: number;
     name: string;
     inputProps: Object;
     rules?: {
@@ -14,7 +15,7 @@ interface InputProps {
 
 const Input: React.FC<InputProps> = ({
   control,
-  inputData: { name, inputProps, rules },
+  data: { name, inputProps, rules },
 }) => {
   return (
     <FormControl fullWidth sx={{ mb: '10px' }}>

@@ -1,18 +1,16 @@
-import { Button, Input as MInput } from "@mui/material";
+import { Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { styled } from "styled-components";
 import Input from "./Input";
 import formData from "@/data/formData";
+import RadioGroup from "./RadioGroup";
 
 const Form: React.FC = () => {
-  const {
-    handleSubmit,
-    control,
-    reset,
-  } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       firstName: "",
-    }
+      gender: "male",
+    },
   });
 
   const onSubmit = (data: any) => {
@@ -27,12 +25,19 @@ const Form: React.FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Input control={control} inputData={formData[0]} />
-      <Input control={control} inputData={formData[1]} />
-      <Input control={control} inputData={formData[3]} />
-      <Input control={control} inputData={formData[4]} />
-      <Input control={control} inputData={formData[5]} />
-      <Button type="submit" variant="contained" /* disabled={!isValid} */>Отправить</Button>
+      <Input control={control} data={formData[0]} />
+      <Input control={control} data={formData[1]} />
+      <RadioGroup control={control} data={formData[2]} />
+      <Input control={control} data={formData[3]} />
+      <Input control={control} data={formData[4]} />
+      <Input control={control} data={formData[5]} />
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ display: "block", ml: "auto" }}
+      >
+        Отправить
+      </Button>
     </Form>
   );
 };

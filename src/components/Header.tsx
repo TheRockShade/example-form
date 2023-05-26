@@ -1,12 +1,14 @@
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Container, Toolbar } from "@mui/material";
 import Logo from "./Logo";
 
 const Header = () => {
   return (
-    <AppBar position="static" sx={{ mb: "10px" }}>
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Logo />
-      </Toolbar>
+    <AppBar position="static" sx={{ mb: "20px" }}>
+      <Container>
+        <Toolbar sx={{ justifyContent: "space-between" }} disableGutters>
+          <Logo />
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 };
