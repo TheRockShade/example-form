@@ -13,7 +13,7 @@ interface RadioProps {
 
 const RadioGroup: React.FC<RadioProps> = ({ data: {label, name, rules, inputs}, control }) => {
   return (
-    <FormControl sx={{ mb: "10px" }}>
+    <FormControl fullWidth sx={{ mb: "10px" }}>
       <FormLabel>{label}</FormLabel>
       <Controller
         name={name}

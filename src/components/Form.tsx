@@ -4,12 +4,14 @@ import { styled } from "styled-components";
 import Input from "./Input";
 import formData from "@/data/formData";
 import RadioGroup from "./RadioGroup";
+import Select from "./Select";
 
 const Form: React.FC = () => {
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       firstName: "",
       gender: "male",
+      country: '',
     },
   });
 
@@ -24,13 +26,14 @@ const Form: React.FC = () => {
   });
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form id="main" onSubmit={handleSubmit(onSubmit)}>
       <Input control={control} data={formData[0]} />
       <Input control={control} data={formData[1]} />
       <RadioGroup control={control} data={formData[2]} />
       <Input control={control} data={formData[3]} />
       <Input control={control} data={formData[4]} />
-      <Input control={control} data={formData[5]} />
+      <Select control={control} data={formData[6]} />
+      <Input control={control} data={formData[7]} />
       <Button
         type="submit"
         variant="contained"

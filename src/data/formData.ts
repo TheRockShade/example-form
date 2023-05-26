@@ -39,7 +39,7 @@ const formData = [
     },
   },
   {
-		id: 4,
+    id: 4,
     name: "phone",
     type: "tel",
     inputProps: {
@@ -55,7 +55,7 @@ const formData = [
     },
   },
   {
-		id: 5,
+    id: 5,
     name: "email",
     type: "email",
     inputProps: {
@@ -71,7 +71,24 @@ const formData = [
     },
   },
   {
-		id: 6,
+    id: 6,
+  },
+  {
+    id: 7,
+    name: "country",
+    label: "Страна",
+    type: "select",
+    options: [
+      { value: "russia", label: "Россия" },
+      { value: "usa", label: "США" },
+      { value: "canada", label: "Канада" },
+    ],
+    rules: {
+      required: false,
+    },
+  },
+  {
+    id: 8,
     name: "address",
     type: "text",
     inputProps: {
