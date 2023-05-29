@@ -1,12 +1,7 @@
-import { FormControlLabel, Radio as MRadio } from "@mui/material";
+import { FormControlLabel, FormControlLabelProps, Radio as MRadio } from "@mui/material";
 
-interface RadioProps {
-  label: string;
-  value: string;
-}
-
-const Radio: React.FC<RadioProps> = (props) => {
-  return <FormControlLabel control={<MRadio />} {...props} />;
+const Radio: React.FC<FormControlLabelProps> = (props) => {
+  return <FormControlLabel {...props} control={<MRadio/>} />;
 };
 
 export default Radio;

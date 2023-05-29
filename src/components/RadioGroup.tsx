@@ -5,13 +5,12 @@ import {
   RadioGroup as MRadioGroup,
 } from "@mui/material";
 import Radio from "./Radio";
+import { InputType } from "@/data/formData";
 
-interface RadioProps {
-  data: any;
-  control: any;
-}
-
-const RadioGroup: React.FC<RadioProps> = ({ data: {label, name, rules, inputs}, control }) => {
+const RadioGroup: React.FC<InputType> = ({
+  data: { label, name, rules, inputs },
+  control,
+}) => {
   return (
     <FormControl fullWidth sx={{ mb: "10px" }}>
       <FormLabel>{label}</FormLabel>
@@ -20,9 +19,9 @@ const RadioGroup: React.FC<RadioProps> = ({ data: {label, name, rules, inputs}, 
         rules={rules}
         control={control}
         render={({ field }) => (
-          <MRadioGroup row {...field} defaultValue={"male"}>
-            {inputs.map((input: any) => (
-              <Radio key={input.value} {...input} />
+          <MRadioGroup row {...field}>
+            {inputs?.map((input) => (
+              <Radio key={input.id} {...input.otherProps} />
             ))}
           </MRadioGroup>
         )}

@@ -1,3 +1,4 @@
+import { InputType } from "@/data/formData";
 import {
   FormControl,
   InputLabel,
@@ -6,20 +7,7 @@ import {
 } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-interface SelectProps {
-  control: any;
-  data: {
-    id: number;
-    name: string;
-    label: string;
-    options: any;
-    rules?: {
-      required: boolean;
-    };
-  };
-}
-
-const Select: React.FC<SelectProps> = ({
+const Select: React.FC<InputType> = ({
   control,
   data: { name, label, options, rules },
 }) => {
@@ -34,8 +22,8 @@ const Select: React.FC<SelectProps> = ({
         rules={rules}
         render={({ field }) => (
           <MSelect labelId={labelId} label={label} {...field}>
-            {options.map((option: any) => (
-              <MenuItem value={option.value} key={option.value}>
+            {options?.map((option) => (
+              <MenuItem key={option.id} {...option.otherProps}>
                 {option.label}
               </MenuItem>
             ))}

@@ -1,3 +1,45 @@
+import {
+  FormControlLabelProps,
+  MenuItemProps,
+  TextFieldProps,
+} from "@mui/material";
+import { HTMLInputTypeAttribute } from "react";
+import { RegisterOptions } from "react-hook-form";
+
+export interface FormValuesType {
+  firstName: string;
+  lastName: string;
+  sex: string;
+  phone: string;
+  email: string;
+  country: string;
+  address: string;
+}
+
+export interface InputType {
+  // TODO: Пофиксить тип
+  control: any; // Control<FormValuesType>
+  data: InputDataType;
+}
+
+export interface InputDataType {
+  id: number;
+  name: string;
+  type: HTMLInputTypeAttribute | "select";
+  label?: string;
+  rules?: RegisterOptions;
+  inputProps?: TextFieldProps;
+  inputs?: {
+    id: number;
+    otherProps: any; // TODO: Пофиксить тип
+  }[];
+  options?: {
+    id: number;
+    label: string;
+    otherProps: MenuItemProps;
+  }[];
+}
+
 const formData = [
   {
     id: 1,
@@ -27,12 +69,12 @@ const formData = [
   },
   {
     id: 3,
-    name: "gender",
+    name: "sex",
     label: "Пол",
     type: "radio",
     inputs: [
-      { value: "male", label: "Мужской" },
-      { value: "female", label: "Женский" },
+      { id: 1, otherProps: { label: "Мужской", value: "male" } },
+      { id: 2, otherProps: { label: "Женский", value: "female" } },
     ],
     rules: {
       required: false,
@@ -71,17 +113,14 @@ const formData = [
     },
   },
   {
-    id: 6,
-  },
-  {
     id: 7,
     name: "country",
     label: "Страна",
     type: "select",
     options: [
-      { value: "russia", label: "Россия" },
-      { value: "usa", label: "США" },
-      { value: "canada", label: "Канада" },
+      { id: 1, label: "Россия", otherProps: { value: "russia" } },
+      { id: 2, label: "США", otherProps: { value: "usa" } },
+      { id: 3, label: "Канада", otherProps: { value: "canada" } },
     ],
     rules: {
       required: false,
