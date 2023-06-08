@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import globalSlice from "./slices/globalSlice";
+import form from './slices/formSlice';
+import global from "./slices/globalSlice";
 
 export const store = configureStore({
-  reducer: { global: globalSlice },
+  reducer: { global, form },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

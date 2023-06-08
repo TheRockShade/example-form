@@ -6,6 +6,7 @@ const Input: React.FC<InputType> = ({
   control,
   data: { name, inputProps, rules },
 }) => {
+
   return (
     <FormControl fullWidth sx={{ mb: "10px" }}>
       <Controller

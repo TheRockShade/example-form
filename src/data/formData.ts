@@ -4,7 +4,7 @@ import {
   TextFieldProps,
 } from "@mui/material";
 import { HTMLInputTypeAttribute } from "react";
-import { RegisterOptions } from "react-hook-form";
+import { Control, RegisterOptions } from "react-hook-form";
 
 export interface FormValuesType {
   firstName: string;
@@ -18,15 +18,15 @@ export interface FormValuesType {
 
 export interface InputType {
   // TODO: Пофиксить тип
-  control: any; // Control<FormValuesType>
+  control: Control<FormValuesType>
   data: InputDataType;
 }
 
 export interface InputDataType {
   id: number;
-  name: string;
+  name: keyof FormValuesType;
   type: HTMLInputTypeAttribute | "select";
-  label?: string;
+  label: string;
   rules?: RegisterOptions;
   inputProps?: TextFieldProps;
   inputs?: {
@@ -40,10 +40,11 @@ export interface InputDataType {
   }[];
 }
 
-const formData = [
+const formData : InputDataType[] = [
   {
     id: 1,
     name: "firstName",
+		label: 'Имя',
     type: "text",
     inputProps: {
       label: "Имя",
@@ -57,6 +58,7 @@ const formData = [
   {
     id: 2,
     name: "lastName",
+		label: 'фамилия',
     type: "text",
     inputProps: {
       label: "Фамилия",
@@ -83,6 +85,7 @@ const formData = [
   {
     id: 4,
     name: "phone",
+		label: 'Телефон',
     type: "tel",
     inputProps: {
       label: "Телефон",
@@ -99,6 +102,7 @@ const formData = [
   {
     id: 5,
     name: "email",
+		label: 'Электронная почта',
     type: "email",
     inputProps: {
       label: "E-mail",
@@ -129,6 +133,7 @@ const formData = [
   {
     id: 8,
     name: "address",
+		label: 'Адрес',
     type: "text",
     inputProps: {
       label: "Адрес",

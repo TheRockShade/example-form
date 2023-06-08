@@ -1,5 +1,17 @@
 import Form from "@/components/Form";
+import FormData from "@/components/FormData";
+import { useSelector } from "react-redux";
 
-const index: React.FC = () => <Form />;
+const Index: React.FC = () => {
+  const formData = useSelector((state) => state?.form.cards);
+  console.log(formData);
 
-export default index;
+  return (
+    <>
+      <Form />
+      {!!formData.length && <FormData data={formData} />}
+    </>
+  );
+};
+
+export default Index;

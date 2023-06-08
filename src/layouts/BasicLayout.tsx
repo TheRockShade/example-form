@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import GlobalStyle from "@/styles/GlobalStyle";
+import { CssBaseline, ScopedCssBaseline } from "@mui/material";
 import Head from "next/head";
 
 interface BasicLayoutProps {
@@ -12,7 +12,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = ({ children }) => {
       <Head>
         <title>Form Example</title>
       </Head>
-			<GlobalStyle />
+      <CssBaseline />
       <Header />
       {children}
     </>

@@ -1,12 +1,15 @@
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { styled } from "styled-components";
 import Input from "./Input";
 import formData, { FormValuesType, InputDataType } from "@/data/formData";
 import Select from "./Select";
 import RadioGroup from "./RadioGroup";
+import { useDispatch } from "react-redux";
+import { addCard } from "@/redux/slices/formSlice";
 
 const Form: React.FC = () => {
+  const dispatch = useDispatch();
+
   const { handleSubmit, control, reset } = useForm<FormValuesType>({
     defaultValues: {
       firstName: "",
@@ -17,18 +20,33 @@ const Form: React.FC = () => {
       country: "",
       address: "",
     },
+    mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<FormValuesType> = (data): void => {
-    console.log(data);
-    reset();
-  };
+    interface dataType {
+      id: number;
+      name: string;
+      value: string;
+      label?: string;
+    }
 
-  // TODO: Fix console warning
-  const Form = styled("form")({
-    maxWidth: "580px",
-    margin: "0 auto",
-  });
+    const newData: dataType[] = [];
+
+    Object.keys(data).forEach(
+      (key, i) =>
+        !!data[key] && newData.push({ id: i, name: key, value: data[key] })
+    );
+
+    newData.forEach((input) => {
+      const item = formData.find((el) => el.name === input.name);
+      input.label = item?.label;
+    });
+
+    dispatch(addCard(newData));
+
+    // reset();
+  };
 
   const getInput = (input: InputDataType): JSX.Element => {
     let Component;
@@ -47,8 +65,13 @@ const Form: React.FC = () => {
     return <Component control={control} data={input} key={input.id} />;
   };
 
+  const SForm = styled("form")`
+    max-width: 580px;
+    margin: 20px auto 0;
+  `;
+
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <SForm onSubmit={handleSubmit(onSubmit)}>
       {formData.map((input) => getInput(input))}
       <Button
         type="submit"
@@ -57,7 +80,7 @@ const Form: React.FC = () => {
       >
         Отправить
       </Button>
-    </Form>
+    </SForm>
   );
 };
 
