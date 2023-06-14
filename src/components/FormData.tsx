@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   Card,
   CardContent,
@@ -6,11 +7,19 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import styled from "@emotion/styled";
 
-interface FormDataProps {}
+import { useAppDispatch } from "@/hooks/redux";
+import { deleteCard } from "@/redux/slices/formSlice";
+
+import { formCardType } from "@/data/formData";
+
+interface FormDataProps {
+  data: formCardType[];
+}
 
 const FormData: React.FC<FormDataProps> = ({ data }) => {
+  const dispatch = useAppDispatch();
+
   const SFormData = styled("div")`
     max-width: 580px;
     margin: 20px auto 0;
@@ -24,21 +33,21 @@ const FormData: React.FC<FormDataProps> = ({ data }) => {
 
   return (
     <SFormData>
-      {data.map((card, i: number) => (
-        <SCard key={i}>
+      {data.map((card) => (
+        <SCard key={card.id}>
           <CardHeader
             action={
               <IconButton
                 color="inherit"
                 sx={{ p: 0 }}
-                onClick={() => console.log("close")}
+                onClick={() => dispatch(deleteCard(card.id))}
               >
                 <CloseIcon />
               </IconButton>
             }
           />
           <CardContent>
-            {card.map((textfield) => (
+            {card.data.map((textfield) => (
               <Typography key={textfield.id}>
                 {textfield.label}: {textfield.value}
               </Typography>

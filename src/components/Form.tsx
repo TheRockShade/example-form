@@ -1,51 +1,64 @@
-import { Button, styled } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Input from "./Input";
-import formData, { FormValuesType, InputDataType } from "@/data/formData";
-import Select from "./Select";
-import RadioGroup from "./RadioGroup";
-import { useDispatch } from "react-redux";
+import { Button, styled } from "@mui/material";
+
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { addCard } from "@/redux/slices/formSlice";
 
-const Form: React.FC = () => {
-  const dispatch = useDispatch();
+import Input from "@/components/Input";
+import Select from "@/components/Select";
+import RadioGroup from "@/components/RadioGroup";
 
-  const { handleSubmit, control, reset } = useForm<FormValuesType>({
+import formData, {
+  FormValuesType,
+  InputDataType,
+  formCardType,
+} from "@/data/formData";
+
+const Form: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state?.form);
+
+  const { handleSubmit, control, reset, setError } = useForm<FormValuesType>({
     defaultValues: {
       firstName: "",
       lastName: "",
       sex: "male",
       phone: "",
       email: "",
-      country: "",
+      city: "",
       address: "",
     },
     mode: "onChange",
   });
 
   const onSubmit: SubmitHandler<FormValuesType> = (data): void => {
-    interface dataType {
-      id: number;
-      name: string;
-      value: string;
-      label?: string;
-    }
+    const formCard: formCardType = {
+      id: data.email,
+      data: [],
+    };
 
-    const newData: dataType[] = [];
+    // TODO: fix type
+    const dataKeys: Array<keyof FormValuesType> = Object.keys(data);
 
-    Object.keys(data).forEach(
+    dataKeys.forEach(
       (key, i) =>
-        !!data[key] && newData.push({ id: i, name: key, value: data[key] })
+        !!data[key] &&
+        formCard.data.push({ id: i, name: key, value: data[key] })
     );
 
-    newData.forEach((input) => {
+    formCard.data.forEach((input) => {
       const item = formData.find((el) => el.name === input.name);
       input.label = item?.label;
     });
 
-    dispatch(addCard(newData));
+    const isRegister = !!state.find((card) => card.id === formCard.id);
 
-    // reset();
+    if (isRegister) {
+      setError("email", { message: "Пользователь уже зарегестрирован" });
+    } else {
+      dispatch(addCard(formCard));
+      reset();
+    }
   };
 
   const getInput = (input: InputDataType): JSX.Element => {

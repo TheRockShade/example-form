@@ -1,8 +1,4 @@
-import {
-  FormControlLabelProps,
-  MenuItemProps,
-  TextFieldProps,
-} from "@mui/material";
+import { MenuItemProps, TextFieldProps } from "@mui/material";
 import { HTMLInputTypeAttribute } from "react";
 import { Control, RegisterOptions } from "react-hook-form";
 
@@ -12,13 +8,12 @@ export interface FormValuesType {
   sex: string;
   phone: string;
   email: string;
-  country: string;
+  city: string;
   address: string;
 }
 
 export interface InputType {
-  // TODO: Пофиксить тип
-  control: Control<FormValuesType>
+  control: Control<FormValuesType>;
   data: InputDataType;
 }
 
@@ -31,7 +26,7 @@ export interface InputDataType {
   inputProps?: TextFieldProps;
   inputs?: {
     id: number;
-    otherProps: any; // TODO: Пофиксить тип
+    otherProps: { label: string; value: string };
   }[];
   options?: {
     id: number;
@@ -40,11 +35,23 @@ export interface InputDataType {
   }[];
 }
 
-const formData : InputDataType[] = [
+export interface formCardDataType {
+  id: number;
+  name: string;
+  value: string;
+  label?: string;
+}
+
+export interface formCardType {
+  id: string;
+  data: Array<formCardDataType>;
+}
+
+const formData: InputDataType[] = [
   {
     id: 1,
     name: "firstName",
-		label: 'Имя',
+    label: "Имя",
     type: "text",
     inputProps: {
       label: "Имя",
@@ -58,7 +65,7 @@ const formData : InputDataType[] = [
   {
     id: 2,
     name: "lastName",
-		label: 'фамилия',
+    label: "фамилия",
     type: "text",
     inputProps: {
       label: "Фамилия",
@@ -85,7 +92,7 @@ const formData : InputDataType[] = [
   {
     id: 4,
     name: "phone",
-		label: 'Телефон',
+    label: "Телефон",
     type: "tel",
     inputProps: {
       label: "Телефон",
@@ -102,7 +109,7 @@ const formData : InputDataType[] = [
   {
     id: 5,
     name: "email",
-		label: 'Электронная почта',
+    label: "Электронная почта",
     type: "email",
     inputProps: {
       label: "E-mail",
@@ -118,13 +125,13 @@ const formData : InputDataType[] = [
   },
   {
     id: 7,
-    name: "country",
-    label: "Страна",
+    name: "city",
+    label: "Город",
     type: "select",
     options: [
-      { id: 1, label: "Россия", otherProps: { value: "russia" } },
-      { id: 2, label: "США", otherProps: { value: "usa" } },
-      { id: 3, label: "Канада", otherProps: { value: "canada" } },
+      { id: 1, label: "Моска", otherProps: { value: "moscov" } },
+      { id: 2, label: "Самара", otherProps: { value: "samara" } },
+      { id: 3, label: "Тольятти", otherProps: { value: "tolyatti" } },
     ],
     rules: {
       required: false,
@@ -133,7 +140,7 @@ const formData : InputDataType[] = [
   {
     id: 8,
     name: "address",
-		label: 'Адрес',
+    label: "Адрес",
     type: "text",
     inputProps: {
       label: "Адрес",

@@ -1,11 +1,12 @@
-import { InputType } from "@/data/formData";
+import { Controller } from "react-hook-form";
 import {
   FormControl,
   InputLabel,
   Select as MSelect,
   MenuItem,
 } from "@mui/material";
-import { Controller } from "react-hook-form";
+
+import { InputType } from "@/data/formData";
 
 const Select: React.FC<InputType> = ({
   control,

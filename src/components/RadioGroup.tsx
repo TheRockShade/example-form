@@ -3,8 +3,10 @@ import {
   FormControl,
   FormLabel,
   RadioGroup as MRadioGroup,
+  Radio,
+  FormControlLabel,
 } from "@mui/material";
-import Radio from "./Radio";
+
 import { InputType } from "@/data/formData";
 
 const RadioGroup: React.FC<InputType> = ({
@@ -21,7 +23,11 @@ const RadioGroup: React.FC<InputType> = ({
         render={({ field }) => (
           <MRadioGroup row {...field}>
             {inputs?.map((input) => (
-              <Radio key={input.id} {...input.otherProps} />
+              <FormControlLabel
+                key={input.id}
+                control={<Radio />}
+                {...input.otherProps}
+              />
             ))}
           </MRadioGroup>
         )}

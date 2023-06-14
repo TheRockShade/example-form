@@ -1,21 +1,21 @@
+import { formCardType } from "@/data/formData";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export interface FormState {}
-
-const initialState: FormState = {
-  cards: [],
-};
+const initialState: formCardType[] = [];
 
 export const formSlice = createSlice({
   name: "form",
   initialState,
   reducers: {
-    addCard: (state, action: PayloadAction<Object>) => {
-      state.cards.push(action.payload);
+    addCard: (state, action: PayloadAction<formCardType>) => {
+      state.push(action.payload);
+    },
+    deleteCard: (state, action: PayloadAction<string>) => {
+			return state = state.filter((card) => card.id !== action.payload);
     },
   },
 });
 
-export const { addCard } = formSlice.actions;
+export const { addCard, deleteCard } = formSlice.actions;
 
 export default formSlice.reducer;

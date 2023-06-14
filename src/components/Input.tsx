@@ -1,12 +1,12 @@
-import { InputType } from "@/data/formData";
-import { FormControl, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
+import { FormControl, TextField } from "@mui/material";
+
+import { InputType } from "@/data/formData";
 
 const Input: React.FC<InputType> = ({
   control,
   data: { name, inputProps, rules },
 }) => {
-
   return (
     <FormControl fullWidth sx={{ mb: "10px" }}>
       <Controller

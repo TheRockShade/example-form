@@ -1,5 +1,6 @@
 import { AppBar, Container, Toolbar } from "@mui/material";
-import Logo from "./Logo";
+
+import Logo from "@/components/Logo";
 
 const Header = () => {
   return (
